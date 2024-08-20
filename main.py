@@ -1,20 +1,15 @@
-#Edit of code
-#----Modules----#
 import pandas as pd
 import matplotlib.pyplot as plt
 
-#----Global Variables----#
 quit = False
 
-#----Setup dataframe and query it here prior to creating visualisation and UI functions----#
 original_df = pd.read_csv('Deaths in NSW 2012~2022')
 
 
-Deaths_in_NSW_2012~2022_df = pd.read_csv('data/Deaths in NSW 2012~2022_aud.csv',
+Deaths_in_NSW_2012-2022_df = pd.read_csv('data/Deaths in NSW 2012-2022.csv',
                             header=None,
                             names=['Country', 'Local', 'AUD', 'Date'])
 
-#----Define Functions Below----#
 def showOriginalData():
     print(original_df)
 
@@ -60,8 +55,5 @@ def userOptions():
     except:
         print('Enter a number, it is not that hard.')
 
-   
-
-#----Main program----#
 while not quit:
     userOptions()
