@@ -7,10 +7,10 @@ import matplotlib.pyplot as plt
 quit = False
 
 #----Setup dataframe and query it here prior to creating visualisation and UI functions----#
-original_df = pd.read_csv('data/big_mac_aud.csv')
+original_df = pd.read_csv('Deaths in NSW 2012~2022')
 
 
-big_mac_df = pd.read_csv('data/big_mac_aud.csv',
+Deaths_in_NSW_2012~2022_df = pd.read_csv('data/Deaths in NSW 2012~2022_aud.csv',
                             header=None,
                             names=['Country', 'Local', 'AUD', 'Date'])
 
@@ -19,10 +19,10 @@ def showOriginalData():
     print(original_df)
 
 def showUpdatedData():
-    print(big_mac_df)
+    print(Deaths_in_NSW_2012-2022_df)
 
 def showCharts():
-    big_mac_df.plot(
+    Deaths_in_NSW_2012-2022_df.plot(
                     kind='bar',
                     x='Country',
                     y='AUD',
