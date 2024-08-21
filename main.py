@@ -3,38 +3,39 @@ import matplotlib.pyplot as plt
 
 quit = False
 
-original_df = pd.read_csv('Deaths in NSW 2012~2022')
+original_df = pd.read_csv('Deaths in NSW 2012-2022.csv')
 
 
-Deaths_in_NSW_2012-2022_df = pd.read_csv('data/Deaths in NSW 2012-2022.csv',
-                            header=None,
-                            names=['Country', 'Local', 'AUD', 'Date'])
+deathsnsw_df = pd.read_csv('Deaths in NSW 2012-2022.csv')
+deathsnsw_df = deathsnsw_df[deathsnsw_df['Standardised death rate'].str.contains('np')==False]
+deathsnsw_df = deathsnsw_df['Standardised death rate'].astype(float)
+
 
 def showOriginalData():
     print(original_df)
 
 def showUpdatedData():
-    print(Deaths_in_NSW_2012-2022_df)
+    print(deathsnsw_df)
 
 def showCharts():
-    Deaths_in_NSW_2012-2022_df.plot(
+    deathsnsw_df.plot(
                     kind='bar',
-                    x='Country',
-                    y='AUD',
+                    x='Population',
+                    y='Death Rate',
                     color='blue',
                     alpha=0.3,
-                    title='Cost of a Big Mac in AUD')
+                    title='Population\'s effect on death rate')
     plt.show()
 
 def userOptions():
     global quit
 
-    print("""Welcome to the Big Mac Data Extraordinaire!
+    print("""Welcome to the Death Rate Data Extraordinaire! :D
           
     Please select an option:
     1 - Show the original dataset
     2 - Show the updated Data Frame
-    3 - Visualise the cost of a big mac in AUD
+    3 - Visualise the death rate
     4 - Quit Program
         """)
     
