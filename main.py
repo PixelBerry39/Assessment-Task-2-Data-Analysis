@@ -27,6 +27,17 @@ def showCharts():
                     title='Population\'s effect on death rate')
     plt.show()
 
+def mean(): 
+    deathsnsw_df.plot(
+                kind='bar',
+                x='Population',
+                y='Average',
+                color='blue',
+                alpha=0.3,
+                title='Population\'s effect on death rate')
+    plt.show()
+    
+
 def userOptions():
     global quit
 
