@@ -27,16 +27,19 @@ def showCharts():
                     title='Population\'s effect on death rate')
     plt.show()
 
-def mean(): 
+def showMean():
+    mean_death_rate = deathsnsw_df['Average'].mean()
+    print(f"The mean death rate is {mean_death_rate}")
+
     deathsnsw_df.plot(
-                kind='bar',
-                x='Population',
-                y='Average',
-                color='blue',
-                alpha=0.3,
-                title='Population\'s effect on death rate')
+        kind='bar',
+        x='Population',
+        y='Average',
+        color='blue',
+        alpha=0.3,
+        title='Population\'s effect on death rate'
+    )
     plt.show()
-    
 
 def userOptions():
     global quit
@@ -47,7 +50,8 @@ def userOptions():
     1 - Show the original dataset
     2 - Show the updated Data Frame
     3 - Visualise the death rate
-    4 - Quit Program
+    4 - Show the mean death rate
+    5 - Quit Program
         """)
     
     try:
@@ -59,7 +63,9 @@ def userOptions():
             showUpdatedData()
         elif choice == 3:
             showCharts()
-        elif choice == 4:
+        elif choice == 4: 
+            showMean()
+        elif choice == 5:
             quit = True
         else:
             print('A number between 1 and 4, come on!')
