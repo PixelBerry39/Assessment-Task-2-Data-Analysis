@@ -28,18 +28,26 @@ def showCharts():
     plt.show()
 
 def showMean():
-    mean_death_rate = deathsnsw_df['Average'].mean()
+    mean_death_rate = deathsnsw_df['Death Rate'].mean()
     print(f"The mean death rate is {mean_death_rate}")
 
     deathsnsw_df.plot(
         kind='bar',
         x='Population',
-        y='Average',
+        y='Death Rate',  # Plotting the actual death rates
         color='blue',
         alpha=0.3,
-        title='Population\'s effect on death rate'
-    )
-    plt.show()
+        title=f'Mean Death Rate: {mean_death_rate}'
+
+def calculateDeathPercentage():
+    deathsnsw_df['Death Percentage'] = (deathsnsw_df['Death Rate'] / deathsnsw_df['Population']) * 100
+    print(deathsnsw_df[['Suburb', 'Population', 'Death Rate', 'Death Percentage']])
+
+def showExtremes():
+    highest = deathsnsw_df.loc[deathsnsw_df['Death Percentage'].idxmax()]
+    lowest = deathsnsw_df.loc[deathsnsw_df['Death Percentage'].idxmin()]
+    print(f"Suburb with the highest death percentage:\n{highest}\n")
+    print(f"Suburb with the lowest death percentage:\n{lowest}")
 
 def userOptions():
     global quit
@@ -51,7 +59,9 @@ def userOptions():
     2 - Show the updated Data Frame
     3 - Visualise the death rate
     4 - Show the mean death rate
-    5 - Quit Program
+    5 - Calculate death percentage by suburb
+    6 - Show highest and lowest death rates
+    7 - Quit Program
         """)
     
     try:
@@ -66,6 +76,10 @@ def userOptions():
         elif choice == 4: 
             showMean()
         elif choice == 5:
+            calculateDeathPercentage()
+        elif choice == 6:
+            showExtremes()
+        elif choice == 7:
             quit = True
         else:
             print('A number between 1 and 4, come on!')
