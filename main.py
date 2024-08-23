@@ -88,7 +88,7 @@ def userOptions():
     elif choice == 7:
         quit = True
     else:
-        print('A number between 1 and 4, come on!')
+        print('A number between 1 and 7, come on!')
 
 
     #print('Enter a number, it is not that hard.')
