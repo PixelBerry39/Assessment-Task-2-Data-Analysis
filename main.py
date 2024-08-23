@@ -7,8 +7,13 @@ original_df = pd.read_csv('Deaths in NSW 2012-2022.csv')
 
 
 deathsnsw_df = pd.read_csv('Deaths in NSW 2012-2022.csv')
+
 deathsnsw_df = deathsnsw_df[deathsnsw_df['Standardised death rate'].str.contains('np')==False]
-deathsnsw_df = deathsnsw_df['Standardised death rate'].astype(float)
+deathsnsw_df['Estimated resident population'] = deathsnsw_df['Estimated resident population'].str.replace(',', '')
+deathsnsw_df['Standardised death rate'] = deathsnsw_df['Standardised death rate'].astype(float)
+deathsnsw_df['Estimated resident population'] = deathsnsw_df['Estimated resident population'].astype(float)
+deathsnsw_df['Death Percentage'] = (deathsnsw_df['Standardised death rate'] / deathsnsw_df['Estimated resident population']) * 100
+print(deathsnsw_df)
 
 
 def showOriginalData():
@@ -20,28 +25,29 @@ def showUpdatedData():
 def showCharts():
     deathsnsw_df.plot(
                     kind='bar',
-                    x='Population',
-                    y='Death Rate',
+                    x='Estimated resident population',
+                    y='Standardised death rate',
                     color='blue',
                     alpha=0.3,
                     title='Population\'s effect on death rate')
     plt.show()
 
 def showMean():
-    mean_death_rate = deathsnsw_df['Death Rate'].mean()
+    mean_death_rate = deathsnsw_df['Standardised death rate'].mean()
     print(f"The mean death rate is {mean_death_rate}")
 
     deathsnsw_df.plot(
         kind='bar',
-        x='Population',
-        y='Death Rate',  # Plotting the actual death rates
+        x='Estimated resident population',
+        y='Standardised death rate', 
         color='blue',
         alpha=0.3,
         title=f'Mean Death Rate: {mean_death_rate}'
+        )
+    plt.show()
 
 def calculateDeathPercentage():
-    deathsnsw_df['Death Percentage'] = (deathsnsw_df['Death Rate'] / deathsnsw_df['Population']) * 100
-    print(deathsnsw_df[['Suburb', 'Population', 'Death Rate', 'Death Percentage']])
+    print(deathsnsw_df[['Location', 'Estimated resident population', 'Standardised death rate', 'Death Percentage']])
 
 def showExtremes():
     highest = deathsnsw_df.loc[deathsnsw_df['Death Percentage'].idxmax()]
@@ -64,28 +70,28 @@ def userOptions():
     7 - Quit Program
         """)
     
-    try:
-        choice = int(input('Enter Selection: '))
 
-        if choice == 1:
-            showOriginalData()
-        elif choice == 2:
-            showUpdatedData()
-        elif choice == 3:
-            showCharts()
-        elif choice == 4: 
-            showMean()
-        elif choice == 5:
-            calculateDeathPercentage()
-        elif choice == 6:
-            showExtremes()
-        elif choice == 7:
-            quit = True
-        else:
-            print('A number between 1 and 4, come on!')
+    choice = int(input('Enter Selection: '))
 
-    except:
-        print('Enter a number, it is not that hard.')
+    if choice == 1:
+        showOriginalData()
+    elif choice == 2:
+        showUpdatedData()
+    elif choice == 3:
+        showCharts()
+    elif choice == 4: 
+        showMean()
+    elif choice == 5:
+        calculateDeathPercentage()
+    elif choice == 6:
+        showExtremes()
+    elif choice == 7:
+        quit = True
+    else:
+        print('A number between 1 and 4, come on!')
+
+
+    #print('Enter a number, it is not that hard.')
 
 while not quit:
     userOptions()
